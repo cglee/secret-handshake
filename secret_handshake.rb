@@ -3,19 +3,41 @@ class SecretHandshake
   attr_accessor  :large_binary
   attr_reader    :input
 
+  LARGE_BINARY_THRESHOLD = 3
+
   def initialize(input)
     @input = input
   end
 
   def commands
 
-    binary = if input.kind_of? Integer
-               input.to_s(2)
-             else
-               input
-             end
+    binary = convert_input_to_binary_string
 
-    large_binary = true if binary.size > 3
+    check_for_large binary
+
+    generate_comands_from binary
+
+  end
+
+  # Abstraction methods
+
+  def convert_input_to_binary_string
+    if input.kind_of? Integer
+      input.to_s(2)
+    else
+      input
+    end
+  end
+
+  def check_for_large(binary)
+    if binary.size > LARGE_BINARY_THRESHOLD
+      @large_binary = true 
+    else
+      @large_binary = false
+    end
+  end
+
+  def generate_comands_from(binary)
 
     results = []
 
@@ -42,7 +64,6 @@ class SecretHandshake
     else
       results
     end
-
   end
 
 end
