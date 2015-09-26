@@ -28,6 +28,7 @@ class SecretHandshake
   def check_for_large(binary)
     if binary.size > LARGE_BINARY_THRESHOLD
       @large_binary = true 
+# I am not sure why method large_binary= is not accessible here
     else
       @large_binary = false
     end
