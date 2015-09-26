@@ -10,13 +10,9 @@ class SecretHandshake
   end
 
   def commands
-
     binary = convert_input_to_binary_string
-
     check_for_large binary
-
     generate_comands_from binary
-
   end
 
   # Abstraction methods
@@ -43,7 +39,7 @@ class SecretHandshake
 
     binary.reverse.chars.each_with_index do |number, indx| 
 
-      result = case
+      result =  case
                 when (number == '1') && (indx == 0)
                   'wink'
                 when (number == '1') && (indx == 1)
@@ -55,6 +51,7 @@ class SecretHandshake
                 end
 
       results << result
+
     end
 
     results = results.compact
